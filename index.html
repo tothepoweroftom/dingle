@@ -18,8 +18,8 @@
             this.directional = document.getElementById('directional');
         },
         tick: function (time) {
-            this.positionSph.phi = Math.PI * 0.4 + Math.sin(time / 32000 * 2 * Math.PI) * 0.4;
-            this.positionSph.theta = Math.PI + Math.sin(time / 48000 * 2 * Math.PI) * 0.6;
+            this.positionSph.phi = Math.PI * 0.4 + Math.sin(time / 16000 * 2 * Math.PI) * 0.4;
+            this.positionSph.theta = Math.PI + Math.sin(time / 24000 * 2 * Math.PI) * 0.6;
             this.position.setFromSpherical(this.positionSph);
             let positionStr = this.position.x + ' ' + this.position.y + ' ' + this.position.z;
     //        console.log(positionStr);
@@ -34,7 +34,12 @@
 
 <body>
 
-  <a-scene moving-sun>
+  <a-scene moving-sun antialias="true" effects=" colors, outline.sobel?, bloom, film,  godrays, glitch,  fxaa"
+    film="sIntensity: 0.1; nIntensity: 0.2"
+    outline="enabled: false; width: 1.33 1.33; range: 0 10; strength: 5; smooth: true;"
+    colors="mode:hqprtom; mul: 0.66 0.5 0.66; pow: 1 1.33 1.66; quant: 0.3 0.3 0.1; orig: 0.33 0.66 0.66"
+    bloom="filter: bloom!, bloom.filter, #customFilter(bloom_texture 0.3 0.6 0.5); strength: 0.5; radius:0.5"
+    fxaa="true" glitch="false">
     <a-assets>
       <a-asset-item id="tree-obj" src="./models/dingle.obj"></a-asset-item>
     </a-assets>
