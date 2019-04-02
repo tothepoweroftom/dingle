@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A-Frame Particle System Component Example</title>
+    <meta name="description" content="Hello, World!">
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-sun-sky-component@^3.0.0/dist/aframe-sun-sky-component.min.js"></script> 
+
+  </head>
+  <body>
+    <script src="/aframe-effects.min.df60e234.js"></script>
+
+    <a-scene antialias="false" effects=" colors, outline.sobel?, #blendOutline, bloom, film,  godrays, glitch,  fxaa" film="sIntensity: 0.03; nIntensity: 0.2" outline="enabled: false; width: 1.33 1.33; range: 0 10; strength: 3; smooth: true;" colors="mode:hqprtom; mul: 0.66 0.5 0.66; pow: 1 1.33 1.66; quant: 0.3 0.3 0.1; orig: 0.33 0.66 0.66" bloom="filter: bloom!, bloom.filter, #customFilter(bloom_texture 0.3 0.6 0.5); strength: 0.5; radius:1.2" fxaa="true" godrays="src: #sun; threshold: 0. 0.33; intensity: 2" glitch="false">
+      <a-assets>
+        <a-asset-item id="tree-obj" src="./models/dingle.obj"></a-asset-item>
+      </a-assets>
+      <a-sun-sky></a-sun-sky>
+
+      <a-entity obj-model="obj: #tree-obj;" wireframe="true"></a-entity>
+
+    </a-scene>
+  </body>
+</html>

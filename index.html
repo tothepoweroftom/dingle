@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>A-Frame Particle System Component Example</title>
+  <meta name="description" content="Hello, World!" />
+  <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js">
+  </script>
+  <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
+  <script>
+    AFRAME.registerComponent('moving-sun', {
+        init: function () {
+            this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);
+            this.position = new THREE.Vector3();
+            this.sss = document.querySelector('a-simple-sun-sky');
+            this.directional = document.getElementById('directional');
+        },
+        tick: function (time) {
+            this.positionSph.phi = Math.PI * 0.4 + Math.sin(time / 32000 * 2 * Math.PI) * 0.4;
+            this.positionSph.theta = Math.PI + Math.sin(time / 48000 * 2 * Math.PI) * 0.6;
+            this.position.setFromSpherical(this.positionSph);
+            let positionStr = this.position.x + ' ' + this.position.y + ' ' + this.position.z;
+    //        console.log(positionStr);
+            this.sss.setAttribute('sun-position', positionStr);
+            this.directional.setAttribute('position', positionStr);
+        }
+    });
+        </script>
+          <script src="js/vendor/aframe-effects.min.js"></script>
+
+</head>
+
+<body>
+
+  <a-scene moving-sun>
+    <a-assets>
+      <a-asset-item id="tree-obj" src="./models/dingle.obj"></a-asset-item>
+    </a-assets>
+    <a-simple-sun-sky id="sun" sun-position="1 5 -1" light-color="#9D9D9D" dark-color="#6D6D6D" ></a-simple-sun-sky>
+    <!-- <a-entity light="type: ambient; color: #DFDFDF"></a-entity> -->
+    <a-entity id="directional" light="type: directional; color: #FFF; intensity: 0.6" position="0.7 0.4 -1"></a-entity>
+    <!-- <a-sun-sky></a-sun-sky> -->
+    <!-- <a-plane material="color:gray" height="100" width="100" rotation="-90 0 0" position="0 0 0"></a-plane> -->
+
+    <a-entity obj-model="obj: #tree-obj;" material=" wireframe:false;color: gray; side:double;" light="type: point; intensity: 2.0" scale="1 1.5 1"></a-entity>
+    <a-camera position="0 0 0"></a-camera>
+
+  </a-scene>
+</body>
+
+</html>
